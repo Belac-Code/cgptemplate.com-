@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crown Heights University | Excellence in Innovation & Discovery</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#0f172a',
+                            900: '#0B192C',
+                            950: '#050c17',
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .page-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .page-section.active {
+            display: block;
+            opacity: 1;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glass-dark {
+            background: rgba(11, 25, 44, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-amber-600 text-white text-xs md:text-sm font-medium py-2 px-4 text-center flex justify-between items-center px-6 md:px-12">
+        <div class="flex items-center space-x-2 mx-auto md:mx-0">
+            <span class="bg-amber-800 px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase">Admission Alert</span>
+            <span>2026/2027 Academic Session Applications are Now Open!</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-6 text-xs">
+            <a href="tel:+2348060889045" class="hover:underline flex items-center gap-1"><i class="fa-solid fa-phone"></i> +234 806 088 9045</a>
+            <a href="mailto:admissions@crownheights.edu.ng" class="hover:underline flex items-center gap-1"><i class="fa-solid fa-envelope"></i> admissions@crownheights.edu.ng</a>
+        </div>
+    </div>
+
+    <!-- MAIN NAVIGATION HEADER -->
+    <header class="sticky top-0 z-40 bg-navy-900/95 text-white shadow-xl backdrop-blur-md border-b border-navy-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- University Logo / Crest -->
+                <a href="#" onclick="navigateTo('home')" class="flex items-center space-x-3 group">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-600 to-amber-500 flex items-center justify-center text-navy-900 text-2xl font-black shadow-lg group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight block text-white group-hover:text-amber-500 transition-colors">CROWN HEIGHTS</span>
+                        <span class="text-[10px] uppercase tracking-widest text-amber-500 block -mt-1 font-semibold">UNIVERSITY NIGERIA</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2 text-sm font-medium">
+                    <button onclick="navigateTo('home')" class="nav-btn px-3 py-2 rounded-md hover:text-amber-500 hover:bg-navy-800/50 transition-all active-nav" data-page="home">Home</button>
+                    <button onclick="navigateTo('about')" class="nav-btn px-3 py-2 rounded-md hover:text-amber-500 hover:bg-navy-800/50 transition-all" data-page="about">About Us</button>
+                    <button onclick="navigateTo('faculties')" class="nav-btn px-3 py-2 rounded-md hover:text-amber-500 hover:bg-navy-800/50 transition-all" data-page="faculties">Faculties & Programs</button>
+                    <button onclick="navigateTo('leadership')" class="nav-btn px-3 py-2 rounded-md hover:text-amber-500 hover:bg-navy-800/50 transition-all" data-page="leadership">Leadership</button>
+                    <button onclick="navigateTo('gallery')" class="nav-btn px-3 py-2 rounded-md hover:text-amber-500 hover:bg-navy-800/50 transition-all" data-page="gallery">Campus Life</button>
+                    <button onclick="navigateTo('admission')" class="nav-btn px-3 py-2 rounded-md hover:text-amber-500 hover:bg-navy-800/50 transition-all" data-page="admission">Admission</button>
+                </nav>
+
+                <!-- Action Button & Mobile Toggle -->
+                <div class="flex items-center space-x-4">
+                    <button onclick="openAdmissionModal()" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg text-sm font-bold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-navy-950 shadow-lg hover:shadow-amber-500/20 transform hover:-translate-y-0.5 transition-all">
+                        <i class="fa-brands fa-whatsapp text-lg mr-2"></i> Apply Now
+                    </button>
+                    
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-navy-800 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Navigation Drawer -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-navy-950 border-t border-slate-800 px-4 pt-3 pb-6 space-y-2">
+            <button onclick="navigateTo('home'); toggleMobileMenu();" class="block w-full text-left px-3 py-2.5 rounded-md text-base font-medium text-slate-200 hover:bg-navy-800 hover:text-amber-500">Home</button>
+            <button onclick="navigateTo('about'); toggleMobileMenu();" class="block w-full text-left px-3 py-2.5 rounded-md text-base font-medium text-slate-200 hover:bg-navy-800 hover:text-amber-500">About Us</button>
+            <button onclick="navigateTo('faculties'); toggleMobileMenu();" class="block w-full text-left px-3 py-2.5 rounded-md text-base font-medium text-slate-200 hover:bg-navy-800 hover:text-amber-500">Faculties & Programs</button>
+            <button onclick="navigateTo('leadership'); toggleMobileMenu();" class="block w-full text-left px-3 py-2.5 rounded-md text-base font-medium text-slate-200 hover:bg-navy-800 hover:text-amber-500">Leadership</button>
+            <button onclick="navigateTo('gallery'); toggleMobileMenu();" class="block w-full text-left px-3 py-2.5 rounded-md text-base font-medium text-slate-200 hover:bg-navy-800 hover:text-amber-500">Campus Life</button>
+            <button onclick="navigateTo('admission'); toggleMobileMenu();" class="block w-full text-left px-3 py-2.5 rounded-md text-base font-medium text-slate-200 hover:bg-navy-800 hover:text-amber-500">Admission Guidelines</button>
+            <button onclick="openAdmissionModal(); toggleMobileMenu();" class="w-full mt-3 flex items-center justify-center px-4 py-3 rounded-lg text-base font-bold bg-amber-500 text-navy-950 hover:bg-amber-600">
+                <i class="fa-brands fa-whatsapp text-xl mr-2"></i> Apply via WhatsApp
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINERS (Multi-page view emulation) -->
+    <main class="flex-grow">
+
+        <!-- ================= PAGE 1: HOME PAGE ================= -->
+        <section id="page-home" class="page-section active">
+            <!-- Hero Banner Section -->
+            <div class="relative bg-navy-900 min-h-[580px] lg:min-h-[640px] flex items-center overflow-hidden">
+                <!-- Background Image Overlay -->
+                <div class="absolute inset-0 z-0 opacity-25 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=1920&auto=format&fit=crop');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-900/90 to-transparent z-0"></div>
+                
+                <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                    <div class="max-w-3xl">
+                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-amber-500/10 text-amber-500 border border-amber-500/20 mb-6">
+                            <i class="fa-solid fa-award"></i> Premier Accredited Institution
+                        </span>
+                        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                            Excellence in <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Innovation</span>, Leadership & Discovery
+                        </h1>
+                        <p class="text-lg sm:text-xl text-slate-300 mb-8 leading-relaxed">
+                            Empowering future leaders through cutting-edge technology, world-class research facilities, and holistic character building tailored for global impact.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="openAdmissionModal()" class="px-8 py-4 rounded-xl text-base font-bold bg-amber-500 hover:bg-amber-600 text-navy-950 shadow-lg shadow-amber-500/20 flex items-center justify-center gap-3 transition-all hover:scale-105">
+                                <i class="fa-brands fa-whatsapp text-2xl"></i> Start Application (WhatsApp)
+                            </button>
+                            <button onclick="navigateTo('faculties')" class="px-8 py-4 rounded-xl text-base font-bold bg-navy-800/80 hover:bg-navy-800 text-white border border-slate-700 flex items-center justify-center gap-2 transition-all">
+                                Explore Faculties <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating Quick Stats Bar -->
+            <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 bg-white rounded-2xl p-6 sm:p-8 shadow-2xl border border-slate-100">
+                    <div class="text-center p-2 border-r border-slate-100 last:border-0">
+                        <p class="text-3xl sm:text-4xl font-extrabold text-navy-900 font-serif">35+</p>
+                        <p class="text-xs sm:text-sm text-slate-500 font-medium uppercase tracking-wider mt-1">Accredited Programs</p>
+                    </div>
+                    <div class="text-center p-2 border-r border-slate-100 last:border-0">
+                        <p class="text-3xl sm:text-4xl font-extrabold text-amber-600 font-serif">12,000+</p>
+                        <p class="text-xs sm:text-sm text-slate-500 font-medium uppercase tracking-wider mt-1">Active Students</p>
+                    </div>
+                    <div class="text-center p-2 border-r border-slate-100 last:border-0">
+                        <p class="text-3xl sm:text-4xl font-extrabold text-navy-900 font-serif">98%</p>
+                        <p class="text-xs sm:text-sm text-slate-500 font-medium uppercase tracking-wider mt-1">Graduate Employability</p>
+                    </div>
+                    <div class="text-center p-2">
+                        <p class="text-3xl sm:text-4xl font-extrabold text-amber-600 font-serif">15+</p>
+                        <p class="text-xs sm:text-sm text-slate-500 font-medium uppercase tracking-wider mt-1">Modern Research Labs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vice-Chancellor's Welcome Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop" alt="Vice Chancellor Prof. Emmanuel Adebayo" class="w-full h-[450px] object-cover object-top">
+                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-navy-950 via-navy-950/80 to-transparent p-6 text-white">
+                                <h3 class="font-serif text-xl font-bold text-amber-400">Prof. Emmanuel Adebayo</h3>
+                                <p class="text-xs text-slate-300 font-medium">B.Sc, M.Sc, Ph.D, FNAS, Vice-Chancellor</p>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-amber-500/10 rounded-2xl -z-10"></div>
+                        <div class="absolute -top-6 -right-6 w-32 h-32 bg-navy-900/10 rounded-2xl -z-10"></div>
+                    </div>
+
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="text-amber-600 font-bold text-sm tracking-widest uppercase">Vice-Chancellor's Welcome</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-navy-900 leading-tight">
+                            Building a Foundation for Academic Distinction and Global Leadership
+                        </h2>
+                        <blockquote class="italic text-slate-600 text-lg border-l-4 border-amber-500 pl-4 py-1">
+                            "Welcome to Crown Heights University. Our commitment goes beyond traditional teaching; we foster creative thinking, research innovation, and moral fortitude to nurture leaders ready to tackle global challenges."
+                        </blockquote>
+                        <p class="text-slate-600 leading-relaxed">
+                            With state-of-the-art laboratories, a vibrant digital library ecosystem, highly qualified academic faculty, and industry-aligned curricula, CHU provides an environment where passion meets opportunity.
+                        </p>
+                        <div class="pt-2 flex flex-wrap gap-4">
+                            <button onclick="navigateTo('about')" class="inline-flex items-center gap-2 font-bold text-navy-900 hover:text-amber-600 transition-colors">
+                                Read Full Vision Statement <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Quick Highlights -->
+            <div class="bg-slate-100 py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-12">
+                        <h2 class="font-serif text-3xl font-bold text-navy-900">Why Choose Crown Heights?</h2>
+                        <p class="text-slate-600 mt-2">Discover what makes our academic environment unique and impactful.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                            <div class="w-14 h-14 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-2xl mb-6">
+                                <i class="fa-solid fa-microscope"></i>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-navy-900 mb-3">Modern Laboratories</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">Fully equipped engineering workshops and digital science labs providing hands-on practical experience for all STEM students.</p>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                            <div class="w-14 h-14 rounded-xl bg-navy-900/10 text-navy-900 flex items-center justify-center text-2xl mb-6">
+                                <i class="fa-solid fa-briefcase"></i>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-navy-900 mb-3">Industry Placement</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">Direct industrial training attachments and career mentoring with leading multinational corporate partners.</p>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                            <div class="w-14 h-14 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-2xl mb-6">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-navy-900 mb-3">Serene & Secure Campus</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">24/7 campus security surveillance, comfortable residential accommodation, and a peaceful environment ideal for learning.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 2: ABOUT US PAGE ================= -->
+        <section id="page-about" class="page-section">
+            <div class="bg-navy-900 text-white py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="font-serif text-4xl font-bold text-amber-400">About Crown Heights University</h1>
+                    <p class="mt-3 text-slate-300 max-w-2xl mx-auto">Dedicated to intellectual rigor, technological leadership, and character formation.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-4">
+                        <span class="text-amber-600 font-bold uppercase text-xs tracking-wider">Our Foundation</span>
+                        <h2 class="font-serif text-3xl font-bold text-navy-900">Institutional History & Vision</h2>
+                        <p class="text-slate-600 leading-relaxed">
+                            Established to bridge the gap between theoretical knowledge and practical industry application, Crown Heights University stands as a beacon of academic distinction. Fully accredited by the National Universities Commission (NUC), CHU offers standard degree programs designed to meet international benchmarks.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed">
+                            Our green campus incorporates modern architectural designs with eco-friendly infrastructure, providing students with an inspiring academic sanctuary.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop" alt="University Campus Building" class="rounded-2xl shadow-xl border-4 border-white">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-navy-900 text-white p-8 rounded-2xl">
+                        <h3 class="font-serif text-2xl font-bold text-amber-400 mb-4">Our Mission</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">To provide world-class holistic education, encouraging critical inquiry, ethical responsibility, and technological innovation for societal advancement.</p>
+                    </div>
+                    <div class="bg-amber-600 text-white p-8 rounded-2xl">
+                        <h3 class="font-serif text-2xl font-bold text-navy-900 mb-4">Our Vision</h3>
+                        <p class="text-amber-50 text-sm leading-relaxed">To be recognized globally as a premier institution producing top-tier professionals, visionary entrepreneurs, and impactful researchers.</p>
+                    </div>
+                    <div class="bg-slate-100 text-navy-900 p-8 rounded-2xl border border-slate-200">
+                        <h3 class="font-serif text-2xl font-bold text-navy-900 mb-4">Core Values</h3>
+                        <ul class="text-sm space-y-2 font-medium text-slate-700">
+                            <li><i class="fa-solid fa-check text-amber-600 mr-2"></i> Academic Integrity</li>
+                            <li><i class="fa-solid fa-check text-amber-600 mr-2"></i> Innovation & Excellence</li>
+                            <li><i class="fa-solid fa-check text-amber-600 mr-2"></i> Leadership & Discipline</li>
+                            <li><i class="fa-solid fa-check text-amber-600 mr-2"></i> Inclusivity & Diversity</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3: FACULTIES & PROGRAMS PAGE ================= -->
+        <section id="page-faculties" class="page-section">
+            <div class="bg-navy-900 text-white py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="font-serif text-4xl font-bold text-amber-400">Faculties & Degree Programs</h1>
+                    <p class="mt-3 text-slate-300 max-w-2xl mx-auto">Explore our NUC-accredited faculties and career-driven undergraduate degree options.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <!-- Faculty Grid Container -->
+                <div class="space-y-12">
+
+                    <!-- Faculty 1 -->
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden">
+                        <div class="bg-navy-900 p-6 text-white flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div>
+                                <span class="text-amber-400 text-xs font-bold uppercase tracking-widest">Faculty 01</span>
+                                <h2 class="font-serif text-2xl font-bold">Faculty of Engineering & Technology</h2>
+                            </div>
+                            <div class="flex items-center gap-3 bg-navy-800 px-4 py-2 rounded-xl text-xs">
+                                <i class="fa-solid fa-user-tie text-amber-500 text-base"></i>
+                                <div>
+                                    <p class="font-bold text-slate-200">Prof. Kenneth Okafor</p>
+                                    <p class="text-slate-400">Dean of Faculty</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <h3 class="font-bold text-slate-700 uppercase text-xs tracking-wider mb-4">Available Departmental Degree Programs</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-500 transition-colors">
+                                    <h4 class="font-bold text-navy-900">Computer Engineering</h4>
+                                    <p class="text-xs text-slate-500 mt-1">B.Eng (5 Years)</p>
+                                    <button onclick="inquireCourse('B.Eng Computer Engineering')" class="mt-3 text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1">
+                                        Inquire via WhatsApp <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-500 transition-colors">
+                                    <h4 class="font-bold text-navy-900">Electrical & Electronics</h4>
+                                    <p class="text-xs text-slate-500 mt-1">B.Eng (5 Years)</p>
+                                    <button onclick="inquireCourse('B.Eng Electrical & Electronics')" class="mt-3 text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1">
+                                        Inquire via WhatsApp <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-500 transition-colors">
+                                    <h4 class="font-bold text-navy-900">Mechanical Engineering</h4>
+                                    <p class="text-xs text-slate-500 mt-1">B.Eng (5 Years)</p>
+                                    <button onclick="inquireCourse('B.Eng Mechanical Engineering')" class="mt-3 text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1">
+                                        Inquire via WhatsApp <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-500 transition-colors">
+                                    <h4 class="font-bold text-navy-900">Civil Engineering</h4>
+                                    <p class="text-xs text-slate-500 mt-1">B.Eng (5 Years)</p>
+                                    <button onclick="inquireCourse('B.Eng Civil Engineering')" class="mt-3 text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1">
+                                        Inquire via WhatsApp <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Faculty 2 -->
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden">
+                        <div class="bg-navy-900 p-6 text-white flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div>
+                                <span class="text-amber-400 text-xs font-bold uppercase tracking-widest">Faculty 02</span>
+                                <h2 class="font-serif text-2xl font-bold">Faculty of Science & Health Sciences</h2>
+                            </div>
+                            <div class="flex items-center gap-3 bg-navy-800 px-4 py-2 rounded-xl text-xs">
+                                <i class="fa-solid fa-user-tie text-amber-500 text-base"></i>
+                                <div>
+                                    <p class="font-bold text-slate-200">Dr. Amina Bello</p>
+                                    <p class="text-slate-400">Dean of Faculty</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <h3 class="font-bold text-slate-700 uppercase text-xs tracking-wider mb-4">Available Departmental Degree Programs</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-500 transition-colors">
+                                    <h4 class="font-bold text-navy-900">Computer Science</h4>
+                                    <p class="text-xs text-slate-500 mt-1">B.Sc (4 Years)</p>
+                                    <button onclick="inquireCourse('B.Sc Computer Science')" class="mt-3 text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1">
+                                        Inquire via WhatsApp <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-500 transition-colors">
+                                    <h4 class="font-bold text-navy-900">Nursing Science</h4>
+                                    <p class="text-xs text-slate-500 mt-1">B.NSc (5 Years)</p>
+                                    <button onclick="inquireCourse('B.NSc Nursing Science')" class="mt-3 text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1">
+                                        Inquire via WhatsApp <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-500 transition-colors">
+                                    <h4 class="font-bold text-navy-900">Microbiology</h4>
+                                    <p class="text-xs text-slate-500 mt-1">B.Sc (4 Years)</p>
+                                    <button onclick="inquireCourse('B.Sc Microbiology')" class="mt-3 text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1">
+                                        Inquire via WhatsApp <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-500 transition-colors">
+                                    <h4 class="font-bold text-navy-900">Biochemistry</h4>
+                                    <p class="text-xs text-slate-500 mt-1">B.Sc (4 Years)</p>
+                                    <button onclick="inquireCourse('B.Sc Biochemistry')" class="mt-3 text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1">
+                                        Inquire via WhatsApp <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Faculty 3 -->
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden">
+                        <div class="bg-navy-900 p-6 text-white flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div>
+                                <span class="text-amber-400 text-xs font-bold uppercase tracking-widest">Faculty 03</span>
+                                <h2 class="font-serif text-2xl font-bold">Faculty of Management & Social Sciences</h2>
+                            </div>
+                            <div class="flex items-center gap-3 bg-navy-800 px-4 py-2 rounded-xl text-xs">
+                                <i class="fa-solid fa-user-tie text-amber-500 text-base"></i>
+                                <div>
+                                    <p class="font-bold text-slate-200">Dr. Solomon Igwe</p>
+                                    <p class="text-slate-400">Dean of Faculty</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 md:p-8">
+                            <h3 class="font-bold text-slate-700 uppercase text-xs tracking-wider mb-4">Available Departmental Degree Programs</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-500 transition-colors">
+                                    <h4 class="font-bold text-navy-900">Business Administration</h4>
+                                    <p class="text-xs text-slate-500 mt-1">B.Sc (4 Years)</p>
+                                    <button onclick="inquireCourse('B.Sc Business Administration')" class="mt-3 text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1">
+                                        Inquire via WhatsApp <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-500 transition-colors">
+                                    <h4 class="font-bold text-navy-900">Accounting</h4>
+                                    <p class="text-xs text-slate-500 mt-1">B.Sc (4 Years)</p>
+                                    <button onclick="inquireCourse('B.Sc Accounting')" class="mt-3 text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1">
+                                        Inquire via WhatsApp <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-500 transition-colors">
+                                    <h4 class="font-bold text-navy-900">Mass Communication</h4>
+                                    <p class="text-xs text-slate-500 mt-1">B.Sc (4 Years)</p>
+                                    <button onclick="inquireCourse('B.Sc Mass Communication')" class="mt-3 text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1">
+                                        Inquire via WhatsApp <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-500 transition-colors">
+                                    <h4 class="font-bold text-navy-900">Economics</h4>
+                                    <p class="text-xs text-slate-500 mt-1">B.Sc (4 Years)</p>
+                                    <button onclick="inquireCourse('B.Sc Economics')" class="mt-3 text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1">
+                                        Inquire via WhatsApp <i class="fa-brands fa-whatsapp text-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 4: LEADERSHIP PAGE ================= -->
+        <section id="page-leadership" class="page-section">
+            <div class="bg-navy-900 text-white py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="font-serif text-4xl font-bold text-amber-400">University Leadership & Management</h1>
+                    <p class="mt-3 text-slate-300 max-w-2xl mx-auto">Meet the principal officers guiding Crown Heights University towards global excellence.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Officer 1 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop" alt="VC" class="w-full h-64 object-cover object-top">
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">Vice-Chancellor</span>
+                            <h3 class="font-serif text-xl font-bold text-navy-900 mt-1">Prof. Emmanuel Adebayo</h3>
+                            <p class="text-xs text-slate-500 font-medium mt-1">B.Sc, M.Sc, Ph.D, FNAS</p>
+                            <p class="text-slate-600 text-xs mt-3 leading-relaxed">Oversees overall institutional management, academic strategy, and international research collaborations.</p>
+                        </div>
+                    </div>
+
+                    <!-- Officer 2 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop" alt="Deputy VC" class="w-full h-64 object-cover object-top">
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">Deputy Vice-Chancellor</span>
+                            <h3 class="font-serif text-xl font-bold text-navy-900 mt-1">Prof. Grace Nnamdi</h3>
+                            <p class="text-xs text-slate-500 font-medium mt-1">B.Sc, M.Sc, Ph.D</p>
+                            <p class="text-slate-600 text-xs mt-3 leading-relaxed">Directs academic planning, curriculum evaluation, and student academic affairs across all departments.</p>
+                        </div>
+                    </div>
+
+                    <!-- Officer 3 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop" alt="Registrar" class="w-full h-64 object-cover object-top">
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">University Registrar</span>
+                            <h3 class="font-serif text-xl font-bold text-navy-900 mt-1">Dr. Christopher Danjuma</h3>
+                            <p class="text-xs text-slate-500 font-medium mt-1">B.A, M.P.A, Ph.D, FCIA</p>
+                            <p class="text-slate-600 text-xs mt-3 leading-relaxed">Head of university administrative council, student records, admissions registry, and corporate secretarial duties.</p>
+                        </div>
+                    </div>
+
+                    <!-- Officer 4 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop" alt="Bursar" class="w-full h-64 object-cover object-top">
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">University Bursar</span>
+                            <h3 class="font-serif text-xl font-bold text-navy-900 mt-1">Mr. Olabisi Folorunsho</h3>
+                            <p class="text-xs text-slate-500 font-medium mt-1">B.Sc, MBA, FCA</p>
+                            <p class="text-slate-600 text-xs mt-3 leading-relaxed">Chief Financial Officer responsible for institutional financial planning, treasury management, and fee structure.</p>
+                        </div>
+                    </div>
+
+                    <!-- Officer 5 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1580894732413-a72359d99153?q=80&w=600&auto=format&fit=crop" alt="Librarian" class="w-full h-64 object-cover object-top">
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">University Librarian</span>
+                            <h3 class="font-serif text-xl font-bold text-navy-900 mt-1">Dr. (Mrs) Victoria Bassey</h3>
+                            <p class="text-xs text-slate-500 font-medium mt-1">B.MLS, M.LS, Ph.D</p>
+                            <p class="text-slate-600 text-xs mt-3 leading-relaxed">Manages physical libraries, electronic database subscriptions, and digital learning resource centers.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 5: CAMPUS LIFE / GALLERY PAGE ================= -->
+        <section id="page-gallery" class="page-section">
+            <div class="bg-navy-900 text-white py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="font-serif text-4xl font-bold text-amber-400">Campus Facilities & Environment</h1>
+                    <p class="mt-3 text-slate-300 max-w-2xl mx-auto">Take a visual tour of our modern academic infrastructure and student life spaces.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="group relative rounded-2xl overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=600&auto=format&fit=crop" alt="Lab" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/20 to-transparent p-6 flex flex-col justify-end text-white">
+                            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider">Engineering</span>
+                            <h3 class="font-serif text-lg font-bold">Advanced Robotics & Tech Lab</h3>
+                        </div>
+                    </div>
+
+                    <div class="group relative rounded-2xl overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=600&auto=format&fit=crop" alt="Library" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/20 to-transparent p-6 flex flex-col justify-end text-white">
+                            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider">Research</span>
+                            <h3 class="font-serif text-lg font-bold">Ultra-Modern E-Library</h3>
+                        </div>
+                    </div>
+
+                    <div class="group relative rounded-2xl overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=600&auto=format&fit=crop" alt="Lecture Hall" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/20 to-transparent p-6 flex flex-col justify-end text-white">
+                            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider">Academics</span>
+                            <h3 class="font-serif text-lg font-bold">Interactive Amphitheatre Lecture Complex</h3>
+                        </div>
+                    </div>
+
+                    <div class="group relative rounded-2xl overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=600&auto=format&fit=crop" alt="Medical Lab" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/20 to-transparent p-6 flex flex-col justify-end text-white">
+                            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider">Health Sciences</span>
+                            <h3 class="font-serif text-lg font-bold">Clinical Nursing & Science Skills Lab</h3>
+                        </div>
+                    </div>
+
+                    <div class="group relative rounded-2xl overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=600&auto=format&fit=crop" alt="Sports" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/20 to-transparent p-6 flex flex-col justify-end text-white">
+                            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider">Recreation</span>
+                            <h3 class="font-serif text-lg font-bold">Standard Basketball & Sports Arena</h3>
+                        </div>
+                    </div>
+
+                    <div class="group relative rounded-2xl overflow-hidden shadow-md">
+                        <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=600&auto=format&fit=crop" alt="Hostel" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/20 to-transparent p-6 flex flex-col justify-end text-white">
+                            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider">Accommodation</span>
+                            <h3 class="font-serif text-lg font-bold">Student Residential Halls</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 6: ADMISSION & PRE-REGISTRATION ================= -->
+        <section id="page-admission" class="page-section">
+            <div class="bg-navy-900 text-white py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="font-serif text-4xl font-bold text-amber-400">Admissions Guidelines & Application</h1>
+                    <p class="mt-3 text-slate-300 max-w-2xl mx-auto">Start your application journey directly with our admission officers via WhatsApp or Email.</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <!-- Guidelines Column -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <h2 class="font-serif text-2xl font-bold text-navy-900">General Requirements</h2>
+                        <div class="space-y-4">
+                            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                                <h3 class="font-bold text-navy-900 text-sm"><i class="fa-solid fa-graduation-cap text-amber-500 mr-2"></i> UTME / 100 Level Entry</h3>
+                                <p class="text-slate-600 text-xs mt-2 leading-relaxed">Minimum 5 O'Level credit passes including English Language & Mathematics in SSCE/GCE/NECO (max 2 sittings) + valid UTME score.</p>
+                            </div>
+
+                            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                                <h3 class="font-bold text-navy-900 text-sm"><i class="fa-solid fa-diagram-project text-amber-500 mr-2"></i> Direct Entry / 200 Level</h3>
+                                <p class="text-slate-600 text-xs mt-2 leading-relaxed">ND (Upper Credit), HND, or JUPEB/A-Level qualifications in relevant subject combinations.</p>
+                            </div>
+
+                            <div class="bg-amber-500/10 p-5 rounded-xl border border-amber-500/30">
+                                <h3 class="font-bold text-amber-700 text-sm"><i class="fa-solid fa-headset mr-2"></i> Need Instant Assistance?</h3>
+                                <p class="text-slate-700 text-xs mt-1">Our admission desk is available Mon - Fri (8:00 AM - 5:00 PM) to walk you through the process.</p>
+                                <a href="https://wa.me/2348060889045" target="_blank" class="inline-flex items-center gap-2 mt-3 text-xs font-bold text-navy-900 bg-amber-500 px-4 py-2 rounded-lg hover:bg-amber-600">
+                                    <i class="fa-brands fa-whatsapp text-base"></i> Chat Admission Officer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Application Form Column -->
+                    <div class="lg:col-span-7">
+                        <div class="bg-white p-8 rounded-2xl shadow-xl border border-slate-200">
+                            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+                                <div>
+                                    <h2 class="font-serif text-2xl font-bold text-navy-900">Pre-Registration Form</h2>
+                                    <p class="text-xs text-slate-500">Fill out your details to generate your direct application payload.</p>
+                                </div>
+                                <span class="text-2xl text-amber-500"><i class="fa-solid fa-file-signature"></i></span>
+                            </div>
+
+                            <form id="admissionForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name *</label>
+                                        <input type="text" id="fullName" required placeholder="e.g. John Doe" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Phone Number *</label>
+                                        <input type="tel" id="phoneNumber" required placeholder="e.g. 08012345678" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Email Address *</label>
+                                        <input type="email" id="emailAddress" required placeholder="e.g. john@example.com" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">O'Level Status *</label>
+                                        <select id="olevelStatus" required class="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                                            <option value="">Select Status</option>
+                                            <option value="Results Ready (1 Sitting)">Results Ready (1 Sitting)</option>
+                                            <option value="Results Ready (2 Sittings)">Results Ready (2 Sittings)</option>
+                                            <option value="Awaiting Results">Awaiting Results</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Target Faculty *</label>
+                                        <select id="facultySelect" onchange="updateCourses()" required class="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                                            <option value="">Select Faculty</option>
+                                            <option value="Engineering">Faculty of Engineering & Tech</option>
+                                            <option value="Sciences">Faculty of Science & Health Sciences</option>
+                                            <option value="Management">Faculty of Management & Social Sciences</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Desired Course *</label>
+                                        <select id="courseSelect" required class="w-full px-4 py-2.5 rounded-lg border border-slate-300 text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                                            <option value="">Select Faculty First</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="pt-4 flex flex-col sm:flex-row gap-3">
+                                    <button type="submit" class="flex-1 py-3 px-6 rounded-xl font-bold bg-amber-500 hover:bg-amber-600 text-navy-950 flex items-center justify-center gap-2 shadow-md">
+                                        <i class="fa-brands fa-whatsapp text-xl"></i> Submit via WhatsApp
+                                    </button>
+                                    <button type="button" onclick="sendViaEmail()" class="py-3 px-6 rounded-xl font-bold bg-navy-900 hover:bg-navy-950 text-white flex items-center justify-center gap-2">
+                                        <i class="fa-solid fa-envelope"></i> Send via Email
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER SECTION -->
+    <footer class="bg-navy-950 text-white border-t border-navy-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Col 1: Campus Identity -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-navy-900 font-bold text-xl">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span class="font-serif text-lg font-bold text-white">CROWN HEIGHTS</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Crown Heights University is dedicated to shaping distinguished professionals with deep moral integrity and practical research capability.
+                    </p>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div>
+                    <h4 class="font-serif text-amber-400 font-bold mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li><a href="#" onclick="navigateTo('about')" class="hover:text-amber-500">About CHU</a></li>
+                        <li><a href="#" onclick="navigateTo('faculties')" class="hover:text-amber-500">Academic Faculties</a></li>
+                        <li><a href="#" onclick="navigateTo('leadership')" class="hover:text-amber-500">Principal Officers</a></li>
+                        <li><a href="#" onclick="navigateTo('gallery')" class="hover:text-amber-500">Campus Facilities</a></li>
+                        <li><a href="#" onclick="navigateTo('admission')" class="hover:text-amber-500">Admission Process</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contact Info -->
+                <div>
+                    <h4 class="font-serif text-amber-400 font-bold mb-4 text-sm uppercase tracking-wider">Campus Contact</h4>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-location-dot text-amber-500 mt-1"></i> 100 University Drive, Knowledge City, Nigeria</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-amber-500"></i> +234 806 088 9045</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-amber-500"></i> info@crownheights.edu.ng</li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Admission Hotline -->
+                <div>
+                    <h4 class="font-serif text-amber-400 font-bold mb-4 text-sm uppercase tracking-wider">Direct WhatsApp Hotline</h4>
+                    <p class="text-xs text-slate-400 mb-3">Speak directly with an admission advisor on WhatsApp:</p>
+                    <a href="https://wa.me/2348060889045" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500 text-navy-950 font-bold text-xs hover:bg-amber-600 transition-colors">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> +234 806 088 9045
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-navy-900 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>&copy; 2026 Crown Heights University Nigeria. All Rights Reserved.</p>
+                <div class="flex space-x-4 text-slate-400">
+                    <a href="#" class="hover:text-amber-500"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="hover:text-amber-500"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="hover:text-amber-500"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-amber-500"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP WIDGET -->
+    <a href="https://wa.me/2348060889045?text=Hello!%20I%20would%20like%20to%20inquire%20about%20admissions%20at%20Crown%20Heights%20University." target="_blank" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 group">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+        <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-bold pl-0 group-hover:pl-2">
+            Inquire via WhatsApp
+        </span>
+    </a>
+
+    <!-- ADMISSION MODAL (QUICK POPUP) -->
+    <div id="admissionModal" class="fixed inset-0 z-50 hidden bg-navy-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <button onclick="closeAdmissionModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-amber-500/10 text-amber-600 rounded-full flex items-center justify-center mx-auto text-2xl mb-2">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-navy-900">Start Admission Inquiry</h3>
+                <p class="text-xs text-slate-500 mt-1">Connect with our team directly on WhatsApp or navigate to our application portal.</p>
+            </div>
+            
+            <div class="space-y-3">
+                <a href="https://wa.me/2348060889045?text=Hello,%20I%20want%20to%20start%20my%20admission%20application%20for%20the%202026/2027%20academic%20session." target="_blank" class="w-full py-3 px-4 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center gap-2 text-sm shadow-md">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Instant WhatsApp Chat
+                </a>
+                <button onclick="closeAdmissionModal(); navigateTo('admission');" class="w-full py-3 px-4 rounded-xl font-bold bg-navy-900 hover:bg-navy-950 text-white flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-solid fa-file-lines"></i> Open Pre-Registration Form
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT ENGINE -->
+    <script>
+        // Multi-page View Switching Logic
+        function navigateTo(pageId) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+            
+            const targetSection = document.getElementById('page-' + pageId);
+            if(targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // Update Nav Button Active State
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                if(btn.getAttribute('data-page') === pageId) {
+                    btn.classList.add('text-amber-500', 'bg-navy-800/50');
+                } else {
+                    btn.classList.remove('text-amber-500', 'bg-navy-800/50');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile Menu Drawer Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Admission Modal Controls
+        function openAdmissionModal() {
+            document.getElementById('admissionModal').classList.remove('hidden');
+        }
+
+        function closeAdmissionModal() {
+            document.getElementById('admissionModal').classList.add('hidden');
+        }
+
+        // Course Inquire via WhatsApp (Direct Course Link)
+        function inquireCourse(courseName) {
+            const message = encodeURIComponent(`Hello Admission Desk, I am interested in applying for ${courseName} at Crown Heights University. Please provide guidelines.`);
+            window.open(`https://wa.me/2348060889045?text=${message}`, '_blank');
+        }
+
+        // Dynamic Department Selection for Form
+        const courseData = {
+            Engineering: ['B.Eng Computer Engineering', 'B.Eng Electrical & Electronics', 'B.Eng Mechanical Engineering', 'B.Eng Civil Engineering'],
+            Sciences: ['B.Sc Computer Science', 'B.NSc Nursing Science', 'B.Sc Microbiology', 'B.Sc Biochemistry'],
+            Management: ['B.Sc Business Administration', 'B.Sc Accounting', 'B.Sc Mass Communication', 'B.Sc Economics']
+        };
+
+        function updateCourses() {
+            const faculty = document.getElementById('facultySelect').value;
+            const courseSelect = document.getElementById('courseSelect');
+            courseSelect.innerHTML = '<option value="">Select Course</option>';
+
+            if (faculty && courseData[faculty]) {
+                courseData[faculty].forEach(course => {
+                    const opt = document.createElement('option');
+                    opt.value = course;
+                    opt.textContent = course;
+                    courseSelect.appendChild(opt);
+                });
+            }
+        }
+
+        // Process Form Submission -> WhatsApp
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('fullName').value;
+            const phone = document.getElementById('phoneNumber').value;
+            const email = document.getElementById('emailAddress').value;
+            const olevel = document.getElementById('olevelStatus').value;
+            const faculty = document.getElementById('facultySelect').value;
+            const course = document.getElementById('courseSelect').value;
+
+            const textPayload = `*NEW ADMISSION PRE-REGISTRATION*%0A%0A` +
+                `*Name:* ${encodeURIComponent(name)}%0A` +
+                `*Phone:* ${encodeURIComponent(phone)}%0A` +
+                `*Email:* ${encodeURIComponent(email)}%0A` +
+                `*O'Level:* ${encodeURIComponent(olevel)}%0A` +
+                `*Faculty:* ${encodeURIComponent(faculty)}%0A` +
+                `*Desired Course:* ${encodeURIComponent(course)}`;
+
+            window.open(`https://wa.me/2348060889045?text=${textPayload}`, '_blank');
+        }
+
+        // Email Fallback Handler
+        function sendViaEmail() {
+            const name = document.getElementById('fullName').value || 'N/A';
+            const course = document.getElementById('courseSelect').value || 'N/A';
+            const body = `Name: ${name}%0ACourse: ${course}`;
+            
+            window.location.href = `mailto:admissions@crownheights.edu.ng?subject=Admission Inquiry - ${encodeURIComponent(name)}&body=${body}`;
+        }
+    </script>
+</body>
+</html>
