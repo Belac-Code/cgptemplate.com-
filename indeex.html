@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covenant Gospel Pioneer University (CGPU) | Official Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cgpBlue: '#00A8FF',
+                        cgpRed: '#E63946',
+                        cgpDark: '#0F1115',
+                        cgpDarkCard: '#1A1D24',
+                        cgpGray: '#F8F9FA'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-slide { transition: opacity 1.5s ease-in-out; }
+        
+        /* Skeleton Animation */
+        @keyframes skeletonPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .skeleton { animation: skeletonPulse 1.5s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-cgpGray dark:bg-cgpDark text-cgpDark dark:text-gray-100 antialiased selection:bg-cgpBlue selection:text-white transition-colors duration-300">
+
+    <!-- 1. PRELOADER SCREEN (3-Second CGP Logo Animation) -->
+    <div id="preloader" class="fixed inset-0 z-[100] bg-cgpDark flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="relative flex items-center justify-center">
+            <!-- Animated Outer Ring -->
+            <div class="w-32 h-32 border-4 border-cgpBlue/20 border-t-cgpRed rounded-full animate-spin"></div>
+            <!-- Central CGP Logo Badge -->
+            <div class="absolute w-20 h-20 bg-cgpDark border-2 border-cgpRed rounded-2xl flex items-center justify-center shadow-2xl shadow-cgpRed/30">
+                <span class="text-cgpBlue font-black text-2xl tracking-tighter">CGP</span>
+            </div>
+        </div>
+        <div class="mt-6 text-center">
+            <h2 class="text-white font-extrabold text-lg tracking-widest uppercase">Covenant Gospel Pioneer University</h2>
+            <p class="text-cgpBlue text-xs font-semibold tracking-wider mt-1 animate-pulse">LOADING OFFICIAL PORTAL...</p>
+        </div>
+    </div>
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-cgpDark text-white text-xs sm:text-sm py-2 px-4 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-3">
+                <!-- Announcement Button links directly to News/Updates under About Us -->
+                <button onclick="navigateToNews()" class="bg-cgpRed hover:bg-red-700 text-white text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider animate-pulse flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-bullhorn"></i> Admissions Open
+                </button>
+                <span class="truncate cursor-pointer hover:underline" onclick="navigateToNews()">2026/2027 Academic Session Application is Live! Click for Updates & Events</span>
+            </div>
+            <div class="flex items-center gap-4 font-medium">
+                <a href="mailto:cgpuni@gmail.com" class="hover:text-cgpBlue transition"><i class="fa-solid fa-envelope mr-1 text-cgpRed"></i> cgpuni@gmail.com</a>
+                <span class="text-gray-600">|</span>
+                <a href="https://wa.me/2348060889045" target="_blank" class="hover:text-cgpBlue transition"><i class="fa-brands fa-whatsapp mr-1 text-green-400"></i> +234 806 088 9045</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-cgpDark/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-sm transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo & Brand Name -->
+                <a href="#" onclick="switchPage('home')" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 bg-cgpDark rounded-xl flex items-center justify-center border-2 border-cgpRed shadow-md overflow-hidden relative">
+                        <span class="text-cgpBlue font-black text-xl tracking-tighter">CGP</span>
+                        <div class="absolute -top-1 -right-1 w-4 h-4 bg-cgpRed rounded-full"></div>
+                    </div>
+                    <div>
+                        <h1 class="font-extrabold text-base sm:text-lg text-cgpDark dark:text-white tracking-tight leading-tight group-hover:text-cgpBlue transition">COVENANT GOSPEL PIONEER UNIVERSITY</h1>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-semibold tracking-wider">EXCELLENCE & INTEGRITY</p>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-1 font-semibold text-sm">
+                    <button onclick="switchPage('home')" id="nav-home" class="nav-btn px-3.5 py-2 rounded-lg text-cgpBlue bg-blue-50 dark:bg-blue-900/30 transition">Home</button>
+                    <button onclick="switchPage('about')" id="nav-about" class="nav-btn px-3.5 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-cgpBlue transition">About Us</button>
+                    <button onclick="switchPage('leadership')" id="nav-leadership" class="nav-btn px-3.5 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-cgpBlue transition">Leadership</button>
+                    <button onclick="switchPage('faculties')" id="nav-faculties" class="nav-btn px-3.5 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-cgpBlue transition">Faculties</button>
+                    <button onclick="switchPage('gallery')" id="nav-gallery" class="nav-btn px-3.5 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-cgpBlue transition">Campus Gallery</button>
+                    <button onclick="switchPage('admission')" id="nav-admission" class="nav-btn px-3.5 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-cgpBlue transition">Admission</button>
+                    <button onclick="switchPage('contact')" id="nav-contact" class="nav-btn px-3.5 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-cgpBlue transition">Contact</button>
+                </nav>
+
+                <!-- Action Controls: Dark Mode Toggle & PDF Download & WhatsApp CTA -->
+                <div class="hidden sm:flex items-center gap-3">
+                    <!-- Light / Dark Mode Toggle Button -->
+                    <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:text-cgpBlue transition" title="Toggle Light/Dark Theme">
+                        <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+
+                    <!-- PDF Prospectus Download Trigger -->
+                    <button onclick="downloadProspectusPDF()" class="bg-gray-800 hover:bg-gray-900 text-white dark:bg-gray-700 dark:hover:bg-gray-600 px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-sm transition">
+                        <i class="fa-solid fa-file-pdf text-cgpRed text-sm"></i> PDF Prospectus
+                    </button>
+
+                    <a href="https://wa.me/2348060889045?text=Hello%20CGPU,%20I%20want%20to%20inquire%20about%20admissions." target="_blank" class="bg-cgpRed hover:bg-red-700 text-white px-4 py-2.5 rounded-xl font-bold text-xs shadow-lg shadow-red-500/20 transition flex items-center gap-1.5">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> Apply
+                    </a>
+                </div>
+
+                <!-- Mobile Controls -->
+                <div class="flex items-center gap-2 lg:hidden">
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200">
+                        <i id="theme-icon-mobile" class="fa-solid fa-moon"></i>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="text-cgpDark dark:text-white text-2xl p-2 focus:outline-none">
+                        <i id="menu-icon" class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white dark:bg-cgpDark border-b border-gray-200 dark:border-gray-800 px-6 py-4 space-y-2 shadow-xl">
+            <button onclick="switchPage('home'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg font-semibold text-cgpBlue bg-blue-50 dark:bg-blue-900/30">Home</button>
+            <button onclick="switchPage('about'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg font-semibold text-gray-700 dark:text-gray-200">About Us</button>
+            <button onclick="switchPage('leadership'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg font-semibold text-gray-700 dark:text-gray-200">Leadership</button>
+            <button onclick="switchPage('faculties'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg font-semibold text-gray-700 dark:text-gray-200">Faculties</button>
+            <button onclick="switchPage('gallery'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg font-semibold text-gray-700 dark:text-gray-200">Campus Gallery</button>
+            <button onclick="switchPage('admission'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg font-semibold text-gray-700 dark:text-gray-200">Admission</button>
+            <button onclick="switchPage('contact'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg font-semibold text-gray-700 dark:text-gray-200">Contact</button>
+            <div class="pt-3 space-y-2">
+                <button onclick="downloadProspectusPDF()" class="w-full bg-gray-800 text-white py-2.5 rounded-xl font-bold block text-center text-sm">
+                    <i class="fa-solid fa-file-pdf mr-2 text-cgpRed"></i> Download PDF Handbook
+                </button>
+                <a href="https://wa.me/2348060889045?text=Hello%20CGPU,%20I%20want%20to%20inquire%20about%20admissions." target="_blank" class="w-full bg-cgpRed text-white text-center py-3 rounded-xl font-bold block shadow-md">
+                    <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Apply via WhatsApp
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SKELETON NETWORK LOADER OVERLAY (Simulated network fallback) -->
+    <div id="skeleton-loader" class="hidden max-w-7xl mx-auto px-4 py-12 space-y-8">
+        <div class="h-8 bg-gray-300 dark:bg-gray-700 rounded-xl w-1/3 skeleton"></div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="h-64 bg-gray-300 dark:bg-gray-700 rounded-3xl skeleton"></div>
+            <div class="h-64 bg-gray-300 dark:bg-gray-700 rounded-3xl skeleton"></div>
+            <div class="h-64 bg-gray-300 dark:bg-gray-700 rounded-3xl skeleton"></div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main id="main-content" class="min-h-screen">
+
+        <!-- ==================== PAGE: HOME ==================== -->
+        <section id="page-home" class="page-section fade-in">
+            <!-- Hero Slider Banner -->
+            <div class="relative h-[550px] sm:h-[650px] w-full overflow-hidden bg-cgpDark">
+                <!-- Slider Background Images (Automated 10s Interval) -->
+                <div class="absolute inset-0">
+                    <div class="hero-slide absolute inset-0 opacity-100 transition-opacity duration-1000 bg-cover bg-center" style="background-image: linear-gradient(to right, rgba(15,17,21,0.92), rgba(15,17,21,0.5)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1600');"></div>
+                    <div class="hero-slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style="background-image: linear-gradient(to right, rgba(15,17,21,0.92), rgba(15,17,21,0.5)), url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=1600');"></div>
+                    <div class="hero-slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style="background-image: linear-gradient(to right, rgba(15,17,21,0.92), rgba(15,17,21,0.5)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1600');"></div>
+                </div>
+
+                <!-- Hero Content -->
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center max-w-3xl">
+                    <span class="inline-flex items-center gap-2 bg-cgpBlue/20 text-cgpBlue border border-cgpBlue/40 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold w-fit mb-6 backdrop-blur-md">
+                        <i class="fa-solid fa-graduation-cap"></i> Welcome to CGPU Official Portal
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                        Shaping Future Leaders Through <span class="text-cgpBlue">Wisdom</span> & <span class="text-cgpRed">Innovation</span>
+                    </h1>
+                    <p class="text-gray-300 text-base sm:text-lg mb-8 leading-relaxed">
+                        Covenant Gospel Pioneer University delivers world-class academic training, moral discipline, and cutting-edge research facilities designed for the modern pioneer.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="switchPage('admission')" class="bg-cgpBlue hover:bg-blue-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition flex items-center gap-3">
+                            Explore Admissions <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <a href="https://wa.me/2348060889045?text=Hello%20CGPU,%20I%20want%20to%20chat%20with%20an%20admissions%20officer." target="_blank" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md font-bold px-8 py-4 rounded-xl transition flex items-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-green-400 text-xl"></i> Chat on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ON-SCROLL JS NUMBER COUNTER SECTION -->
+            <div id="counter-section" class="bg-white dark:bg-cgpDarkCard border-b border-gray-200 dark:border-gray-800 shadow-sm py-8 transition-colors duration-300">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="p-4 border-r last:border-none border-gray-100 dark:border-gray-800">
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-cgpBlue mb-1 flex justify-center items-center">
+                            <span class="counter" data-target="30">0</span>+
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 font-semibold text-sm">Accredited Courses</p>
+                    </div>
+                    <div class="p-4 border-r last:border-none border-gray-100 dark:border-gray-800">
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-cgpRed mb-1 flex justify-center items-center">
+                            <span class="counter" data-target="100">0</span>%
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 font-semibold text-sm">Practical Labs</p>
+                    </div>
+                    <div class="p-4 border-r last:border-none border-gray-100 dark:border-gray-800">
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-cgpDark dark:text-white mb-1 flex justify-center items-center">
+                            <span class="counter" data-target="5">0</span>+
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 font-semibold text-sm">Premier Faculties</p>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-3xl sm:text-4xl font-extrabold text-cgpBlue mb-1">24/7</h3>
+                        <p class="text-gray-600 dark:text-gray-400 font-semibold text-sm">Support Desk</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Preview & VC Welcome -->
+            <section class="py-20 bg-cgpGray dark:bg-cgpDark">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <span class="text-cgpRed font-bold uppercase tracking-widest text-xs">Pioneer Excellence</span>
+                            <h2 class="text-3xl sm:text-4xl font-extrabold text-cgpDark dark:text-white mt-2 mb-6">Empowering Minds, Building Character, Transforming Society</h2>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+                                At Covenant Gospel Pioneer University (CGPU), we combine rigorous academic scholarship with ethical moral values. Our state-of-the-art campus environment and dedicated professors ensure every student is equipped for global leadership.
+                            </p>
+                            <div class="space-y-4 mb-8">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/40 text-cgpBlue flex items-center justify-center font-bold flex-shrink-0 mt-1"><i class="fa-solid fa-check"></i></div>
+                                    <div>
+                                        <h4 class="font-bold text-cgpDark dark:text-white">Fully Accredited Programs</h4>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">All courses meet national and international educational standards.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-900/40 text-cgpRed flex items-center justify-center font-bold flex-shrink-0 mt-1"><i class="fa-solid fa-check"></i></div>
+                                    <div>
+                                        <h4 class="font-bold text-cgpDark dark:text-white">Direct WhatsApp Admission Assistance</h4>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">Instant response from our admissions desk via 08060889045.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="switchPage('about')" class="bg-cgpDark dark:bg-cgpBlue hover:bg-gray-800 dark:hover:bg-blue-600 text-white font-bold px-6 py-3 rounded-xl transition">
+                                Learn More About Us
+                            </button>
+                        </div>
+                        <div class="relative">
+                            <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800">
+                                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800" alt="Students on campus" class="w-full h-[400px] object-cover">
+                            </div>
+                            <div class="absolute -bottom-6 -left-6 bg-white dark:bg-cgpDarkCard p-6 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-800 max-w-xs">
+                                <p class="text-xs text-cgpRed font-bold uppercase mb-1">Vice-Chancellor's Desk</p>
+                                <p class="text-sm font-bold text-cgpDark dark:text-white">"We welcome inquisitive minds ready to pioneer new horizons in science, arts, and technology."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+
+        <!-- ==================== PAGE: ABOUT US (WITH NEWS/UPDATES & VIDEOS) ==================== -->
+        <section id="page-about" class="page-section hidden fade-in py-16 bg-white dark:bg-cgpDark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-cgpBlue font-bold uppercase tracking-widest text-xs">Institutional Profile</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-cgpDark dark:text-white mt-2">About Covenant Gospel Pioneer University</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mt-4">Discover our rich heritage, core values, and unwavering commitment to academic distinction.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <div class="bg-cgpGray dark:bg-cgpDarkCard p-8 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm">
+                        <div class="w-14 h-14 bg-cgpBlue text-white rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-md"><i class="fa-solid fa-eye"></i></div>
+                        <h3 class="text-xl font-bold text-cgpDark dark:text-white mb-3">Our Vision</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">To be a leading global institution of academic excellence, recognized for producing moral pioneers, technological innovators, and ethical leaders.</p>
+                    </div>
+                    <div class="bg-cgpGray dark:bg-cgpDarkCard p-8 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm">
+                        <div class="w-14 h-14 bg-cgpRed text-white rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-md"><i class="fa-solid fa-bullseye"></i></div>
+                        <h3 class="text-xl font-bold text-cgpDark dark:text-white mb-3">Our Mission</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">To provide accessible, high-standard tertiary education powered by cutting-edge research, practical skill acquisition, and sound godly values.</p>
+                    </div>
+                    <div class="bg-cgpGray dark:bg-cgpDarkCard p-8 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm">
+                        <div class="w-14 h-14 bg-cgpDark dark:bg-gray-800 text-white rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-md"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3 class="text-xl font-bold text-cgpDark dark:text-white mb-3">Core Values</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Integrity, Discipline, Innovation, Diligence, and Service to humanity form the bedrock of our campus community.</p>
+                    </div>
+                </div>
+
+                <!-- NEW SEGMENT: NEWS, UPDATES & CAMPUS VIDEOS -->
+                <div id="news-section" class="mt-20 pt-16 border-t border-gray-200 dark:border-gray-800">
+                    <div class="text-center max-w-3xl mx-auto mb-12">
+                        <span class="text-cgpRed font-bold uppercase tracking-widest text-xs">Pioneer Broadcast</span>
+                        <h2 class="text-3xl font-extrabold text-cgpDark dark:text-white mt-2">Latest News, Updates & Events</h2>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">Stay informed on matriculation dates, research breakthroughs, and upcoming administrative deadlines.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- News Card 1 -->
+                        <div class="bg-cgpGray dark:bg-cgpDarkCard rounded-3xl overflow-hidden border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=600" alt="News 1" class="w-full h-48 object-cover">
+                                <div class="p-6">
+                                    <span class="bg-blue-100 dark:bg-blue-900/40 text-cgpBlue text-xs font-bold px-3 py-1 rounded-full">Admission Update</span>
+                                    <h3 class="font-bold text-lg text-cgpDark dark:text-white mt-3 mb-2">2026/2027 Pre-Screening Guidelines Published</h3>
+                                    <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">All candidates applying for Computing, Management, and Natural Sciences can now access direct screening parameters.</p>
+                                </div>
+                            </div>
+                            <div class="p-6 pt-0">
+                                <button onclick="switchPage('admission')" class="text-cgpBlue text-xs font-bold hover:underline">Read & Apply Now &rarr;</button>
+                            </div>
+                        </div>
+
+                        <!-- News Card 2 -->
+                        <div class="bg-cgpGray dark:bg-cgpDarkCard rounded-3xl overflow-hidden border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=600" alt="News 2" class="w-full h-48 object-cover">
+                                <div class="p-6">
+                                    <span class="bg-red-100 dark:bg-red-900/40 text-cgpRed text-xs font-bold px-3 py-1 rounded-full">Research & Tech</span>
+                                    <h3 class="font-bold text-lg text-cgpDark dark:text-white mt-3 mb-2">CGPU Science Faculty Unveils Practical Innovation Hub</h3>
+                                    <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">Our new software engineering and robotics lab expands hands-on technical instruction for undergraduate pioneers.</p>
+                                </div>
+                            </div>
+                            <div class="p-6 pt-0">
+                                <button onclick="switchPage('faculties')" class="text-cgpRed text-xs font-bold hover:underline">Explore Faculty Labs &rarr;</button>
+                            </div>
+                        </div>
+
+                        <!-- Video Showcase Card -->
+                        <div class="bg-cgpDark text-white rounded-3xl p-6 border border-gray-800 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-cgpRed text-white text-xs font-bold px-3 py-1 rounded-full">Campus Video Spotlight</span>
+                                <h3 class="font-bold text-lg mt-4 mb-2">Virtual Campus Tour & Life at CGPU</h3>
+                                <p class="text-gray-400 text-xs mb-6">Watch our introductory showcase highlighting lecture theaters, practical workshops, and sports facilities.</p>
+                                <div class="relative rounded-2xl overflow-hidden bg-gray-900 h-40 flex items-center justify-center border border-gray-700">
+                                    <i class="fa-solid fa-circle-play text-cgpRed text-5xl cursor-pointer hover:scale-110 transition" onclick="alert('Playing CGPU Campus Video Showcase...')"></i>
+                                </div>
+                            </div>
+                            <button onclick="downloadProspectusPDF()" class="mt-6 w-full bg-cgpBlue hover:bg-blue-600 text-white font-bold py-2.5 rounded-xl text-xs transition">
+                                <i class="fa-solid fa-file-pdf mr-1"></i> Download Complete Handbook
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== PAGE: LEADERSHIP ==================== -->
+        <section id="page-leadership" class="page-section hidden fade-in py-16 bg-cgpGray dark:bg-cgpDark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-cgpRed font-bold uppercase tracking-widest text-xs">University Administration</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-cgpDark dark:text-white mt-2">Principal Officers & Leadership</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4">Meet the seasoned academics and administrators steering CGPU toward unprecedented heights.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- VC Card -->
+                    <div class="bg-white dark:bg-cgpDarkCard rounded-3xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 group">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600" alt="Vice Chancellor" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute bottom-4 left-4 bg-cgpBlue text-white text-xs font-bold px-3 py-1 rounded-full">Vice-Chancellor</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-cgpDark dark:text-white mb-1">Prof. Samuel Adebayo, Ph.D.</h3>
+                            <p class="text-xs text-cgpRed font-semibold mb-4">Professor of Applied Physics & Executive VC</p>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6">Overseeing academic policy, international collaborations, and institutional growth.</p>
+                            <a href="mailto:cgpuni@gmail.com" class="text-cgpBlue font-bold text-sm hover:underline"><i class="fa-solid fa-envelope mr-1"></i> Contact Office</a>
+                        </div>
+                    </div>
+
+                    <!-- Bursar Card -->
+                    <div class="bg-white dark:bg-cgpDarkCard rounded-3xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 group">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600" alt="Bursar" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute bottom-4 left-4 bg-cgpRed text-white text-xs font-bold px-3 py-1 rounded-full">University Bursar</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-cgpDark dark:text-white mb-1">Dr. Mrs. Grace Okon, FCA</h3>
+                            <p class="text-xs text-cgpBlue font-semibold mb-4">Chief Financial Officer & Bursar</p>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6">Managing university financial assets, budget planning, and student fee administration.</p>
+                            <a href="mailto:cgpuni@gmail.com" class="text-cgpBlue font-bold text-sm hover:underline"><i class="fa-solid fa-envelope mr-1"></i> Contact Office</a>
+                        </div>
+                    </div>
+
+                    <!-- Registrar Card -->
+                    <div class="bg-white dark:bg-cgpDarkCard rounded-3xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-800 group">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=600" alt="Registrar" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute bottom-4 left-4 bg-cgpDark dark:bg-gray-700 text-white text-xs font-bold px-3 py-1 rounded-full">Registrar</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-cgpDark dark:text-white mb-1">Barr. David Aliyu, MNIM</h3>
+                            <p class="text-xs text-cgpRed font-semibold mb-4">University Registrar & Secretary to Council</p>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6">Directing administrative operations, student records, and admission credential processing.</p>
+                            <a href="mailto:cgpuni@gmail.com" class="text-cgpBlue font-bold text-sm hover:underline"><i class="fa-solid fa-envelope mr-1"></i> Contact Office</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== PAGE: FACULTIES ==================== -->
+        <section id="page-faculties" class="page-section hidden fade-in py-16 bg-white dark:bg-cgpDark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-cgpBlue font-bold uppercase tracking-widest text-xs">Academic Departments</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-cgpDark dark:text-white mt-2">Faculties & Programs Offered</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4">Explore our comprehensive degree programs tailored for industry relevance and practical excellence.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Faculty 1 -->
+                    <div class="bg-cgpGray dark:bg-cgpDarkCard p-8 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-12 h-12 bg-cgpBlue text-white rounded-2xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-laptop-code"></i></div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-cgpDark dark:text-white">Faculty of Computing & Applied Sciences</h3>
+                                    <p class="text-xs text-cgpBlue font-semibold">Dean: Prof. K. E. Nwachukwu</p>
+                                </div>
+                            </div>
+                            <ul class="space-y-3 mb-8 text-sm text-gray-700 dark:text-gray-300">
+                                <li class="flex items-center justify-between bg-white dark:bg-cgpDark p-3 rounded-xl border border-gray-100 dark:border-gray-800">
+                                    <span class="font-semibold">B.Sc. Computer Science</span>
+                                    <a href="https://wa.me/2348060889045?text=Hello%20CGPU,%20I%20want%20to%20apply%20for%20B.Sc.%20Computer%20Science." target="_blank" class="text-xs bg-cgpRed text-white px-3 py-1.5 rounded-lg font-bold hover:bg-red-700 transition"><i class="fa-brands fa-whatsapp mr-1"></i> Apply</a>
+                                </li>
+                                <li class="flex items-center justify-between bg-white dark:bg-cgpDark p-3 rounded-xl border border-gray-100 dark:border-gray-800">
+                                    <span class="font-semibold">B.Sc. Software Engineering</span>
+                                    <a href="https://wa.me/2348060889045?text=Hello%20CGPU,%20I%20want%20to%20apply%20for%20B.Sc.%20Software%20Engineering." target="_blank" class="text-xs bg-cgpRed text-white px-3 py-1.5 rounded-lg font-bold hover:bg-red-700 transition"><i class="fa-brands fa-whatsapp mr-1"></i> Apply</a>
+                                </li>
+                                <li class="flex items-center justify-between bg-white dark:bg-cgpDark p-3 rounded-xl border border-gray-100 dark:border-gray-800">
+                                    <span class="font-semibold">B.Sc. Cyber Security</span>
+                                    <a href="https://wa.me/2348060889045?text=Hello%20CGPU,%20I%20want%20to%20apply%20for%20B.Sc.%20Cyber%20Security." target="_blank" class="text-xs bg-cgpRed text-white px-3 py-1.5 rounded-lg font-bold hover:bg-red-700 transition"><i class="fa-brands fa-whatsapp mr-1"></i> Apply</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Faculty 2 -->
+                    <div class="bg-cgpGray dark:bg-cgpDarkCard p-8 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-12 h-12 bg-cgpRed text-white rounded-2xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-chart-line"></i></div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-cgpDark dark:text-white">Faculty of Management & Social Sciences</h3>
+                                    <p class="text-xs text-cgpRed font-semibold">Dean: Dr. A. M. Bello</p>
+                                </div>
+                            </div>
+                            <ul class="space-y-3 mb-8 text-sm text-gray-700 dark:text-gray-300">
+                                <li class="flex items-center justify-between bg-white dark:bg-cgpDark p-3 rounded-xl border border-gray-100 dark:border-gray-800">
+                                    <span class="font-semibold">B.Sc. Accounting & Finance</span>
+                                    <a href="https://wa.me/2348060889045?text=Hello%20CGPU,%20I%20want%20to%20apply%20for%20B.Sc.%20Accounting." target="_blank" class="text-xs bg-cgpRed text-white px-3 py-1.5 rounded-lg font-bold hover:bg-red-700 transition"><i class="fa-brands fa-whatsapp mr-1"></i> Apply</a>
+                                </li>
+                                <li class="flex items-center justify-between bg-white dark:bg-cgpDark p-3 rounded-xl border border-gray-100 dark:border-gray-800">
+                                    <span class="font-semibold">B.Sc. Business Administration</span>
+                                    <a href="https://wa.me/2348060889045?text=Hello%20CGPU,%20I%20want%20to%20apply%20for%20B.Sc.%20Business%20Admin." target="_blank" class="text-xs bg-cgpRed text-white px-3 py-1.5 rounded-lg font-bold hover:bg-red-700 transition"><i class="fa-brands fa-whatsapp mr-1"></i> Apply</a>
+                                </li>
+                                <li class="flex items-center justify-between bg-white dark:bg-cgpDark p-3 rounded-xl border border-gray-100 dark:border-gray-800">
+                                    <span class="font-semibold">B.Sc. Economics</span>
+                                    <a href="https://wa.me/2348060889045?text=Hello%20CGPU,%20I%20want%20to%20apply%20for%20B.Sc.%20Economics." target="_blank" class="text-xs bg-cgpRed text-white px-3 py-1.5 rounded-lg font-bold hover:bg-red-700 transition"><i class="fa-brands fa-whatsapp mr-1"></i> Apply</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== PAGE: CAMPUS GALLERY ==================== -->
+        <section id="page-gallery" class="page-section hidden fade-in py-16 bg-cgpGray dark:bg-cgpDark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-cgpRed font-bold uppercase tracking-widest text-xs">Visual Tour</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-cgpDark dark:text-white mt-2">Campus & Facilities Gallery</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4">Take a visual tour of our modern science laboratories, lecture theatres, libraries, and serene green environment.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="rounded-3xl overflow-hidden shadow-lg group relative h-72">
+                        <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=800" alt="Main Auditorium" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
+                            <h4 class="text-white font-bold text-lg">Main University Auditorium</h4>
+                        </div>
+                    </div>
+                    <div class="rounded-3xl overflow-hidden shadow-lg group relative h-72">
+                        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=800" alt="Science Laboratory" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
+                            <h4 class="text-white font-bold text-lg">Advanced Science & Tech Labs</h4>
+                        </div>
+                    </div>
+                    <div class="rounded-3xl overflow-hidden shadow-lg group relative h-72">
+                        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=800" alt="Central Library" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
+                            <h4 class="text-white font-bold text-lg">Central Research Library</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== PAGE: ADMISSION ==================== -->
+        <section id="page-admission" class="page-section hidden fade-in py-16 bg-white dark:bg-cgpDark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-cgpBlue font-bold uppercase tracking-widest text-xs">Admissions Desk</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-cgpDark dark:text-white mt-2">Start Your Application</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4">Fill out the pre-registration form below to instantly route your admission request to our WhatsApp desk (+2348060889045).</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    <!-- Requirements & Prospectus Box -->
+                    <div class="lg:col-span-1 space-y-6">
+                        <div class="bg-cgpGray dark:bg-cgpDarkCard p-6 rounded-3xl border border-gray-100 dark:border-gray-800">
+                            <h3 class="font-bold text-lg text-cgpDark dark:text-white mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-info text-cgpBlue"></i> Admission Guidelines
+                            </h3>
+                            <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-300">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-cgpRed mt-1"></i> Minimum credit passes in WAEC/NECO O'Level.
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-cgpRed mt-1"></i> Direct Entry options for NCE, ND, or A-Level candidates.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Download PDF Card -->
+                        <div class="bg-gradient-to-br from-cgpBlue to-blue-700 text-white p-6 rounded-3xl shadow-lg">
+                            <h4 class="font-bold text-lg mb-2"><i class="fa-solid fa-file-pdf mr-2"></i> Official Prospectus</h4>
+                            <p class="text-white/80 text-xs mb-4">Download the full university admission handbook covering fees, hostel life, and departmental course codes.</p>
+                            <button onclick="downloadProspectusPDF()" class="w-full bg-white text-cgpBlue font-bold py-3 rounded-xl hover:bg-gray-100 transition shadow-md text-xs uppercase tracking-wider">
+                                Download PDF Prospectus
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Application Form -->
+                    <div class="lg:col-span-2 bg-cgpGray dark:bg-cgpDarkCard p-8 sm:p-10 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm">
+                        <h3 class="text-2xl font-bold text-cgpDark dark:text-white mb-6">Online Pre-Registration Form</h3>
+                        <form id="whatsappForm" onsubmit="submitToWhatsApp(event)" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Full Name *</label>
+                                    <input type="text" id="applicantName" required class="w-full px-4 py-3 rounded-xl bg-white dark:bg-cgpDark border border-gray-200 dark:border-gray-700 text-cgpDark dark:text-white focus:outline-none focus:border-cgpBlue transition" placeholder="e.g., John Doe">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Phone Number (WhatsApp) *</label>
+                                    <input type="tel" id="applicantPhone" required class="w-full px-4 py-3 rounded-xl bg-white dark:bg-cgpDark border border-gray-200 dark:border-gray-700 text-cgpDark dark:text-white focus:outline-none focus:border-cgpBlue transition" placeholder="e.g., 08012345678">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Select Faculty *</label>
+                                    <select id="applicantFaculty" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-cgpDark border border-gray-200 dark:border-gray-700 text-cgpDark dark:text-white focus:outline-none focus:border-cgpBlue transition">
+                                        <option value="Computing & Applied Sciences">Faculty of Computing & Applied Sciences</option>
+                                        <option value="Management & Social Sciences">Faculty of Management & Social Sciences</option>
+                                        <option value="Natural & Pure Sciences">Faculty of Natural & Pure Sciences</option>
+                                        <option value="Arts & Education">Faculty of Arts & Education</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Desired Course of Study *</label>
+                                    <input type="text" id="applicantCourse" required class="w-full px-4 py-3 rounded-xl bg-white dark:bg-cgpDark border border-gray-200 dark:border-gray-700 text-cgpDark dark:text-white focus:outline-none focus:border-cgpBlue transition" placeholder="e.g., Computer Science">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Additional Notes / Inquiry</label>
+                                <textarea id="applicantNotes" rows="3" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-cgpDark border border-gray-200 dark:border-gray-700 text-cgpDark dark:text-white focus:outline-none focus:border-cgpBlue transition" placeholder="Mention your UTME score or general inquiries..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-cgpRed hover:bg-red-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-red-500/20 transition flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-xl"></i> Submit & Send to WhatsApp (+2348060889045)
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== PAGE: CONTACT ==================== -->
+        <section id="page-contact" class="page-section hidden fade-in py-16 bg-cgpGray dark:bg-cgpDark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-cgpBlue font-bold uppercase tracking-widest text-xs">Get in Touch</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-cgpDark dark:text-white mt-2">Contact University Management</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4">We are always ready to answer your inquiries and provide guidance.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="bg-white dark:bg-cgpDarkCard p-8 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm text-center">
+                        <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/40 text-cgpBlue rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6"><i class="fa-solid fa-location-dot"></i></div>
+                        <h3 class="font-bold text-lg text-cgpDark dark:text-white mb-2">Campus Location</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Covenant Gospel Pioneer University Main Campus, Academic Boulevard, Nigeria.</p>
+                    </div>
+                    <div class="bg-white dark:bg-cgpDarkCard p-8 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm text-center">
+                        <div class="w-14 h-14 bg-red-100 dark:bg-red-900/40 text-cgpRed rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6"><i class="fa-solid fa-phone"></i></div>
+                        <h3 class="font-bold text-lg text-cgpDark dark:text-white mb-2">Direct Telephone & WhatsApp</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">+234 806 088 9045</p>
+                        <a href="https://wa.me/2348060889045" target="_blank" class="text-cgpBlue font-bold text-xs uppercase hover:underline">Chat on WhatsApp</a>
+                    </div>
+                    <div class="bg-white dark:bg-cgpDarkCard p-8 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm text-center">
+                        <div class="w-14 h-14 bg-gray-100 dark:bg-gray-800 text-cgpDark dark:text-white rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6"><i class="fa-solid fa-envelope"></i></div>
+                        <h3 class="font-bold text-lg text-cgpDark dark:text-white mb-2">Official Email</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-2">cgpuni@gmail.com</p>
+                        <a href="mailto:cgpuni@gmail.com" class="text-cgpBlue font-bold text-xs uppercase hover:underline">Send an Email</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-cgpDark text-white pt-16 pb-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-cgpBlue rounded-xl flex items-center justify-center font-black text-white">CGP</div>
+                        <h3 class="font-extrabold text-sm tracking-wider">CGPU PORTAL</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Covenant Gospel Pioneer University. Committed to raising world-class intellectual pioneers with sound godly integrity.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><button onclick="switchPage('home')" class="hover:text-cgpBlue transition">Home</button></li>
+                        <li><button onclick="switchPage('about')" class="hover:text-cgpBlue transition">About Us</button></li>
+                        <li><button onclick="switchPage('faculties')" class="hover:text-cgpBlue transition">Faculties & Courses</button></li>
+                        <li><button onclick="switchPage('admission')" class="hover:text-cgpBlue transition">Admission Portal</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4">Faculties</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>Computing & Applied Sciences</li>
+                        <li>Management & Social Sciences</li>
+                        <li>Natural & Pure Sciences</li>
+                        <li>Arts & Education</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4">Contact Info</h4>
+                    <p class="text-sm text-gray-400 mb-2"><i class="fa-solid fa-envelope mr-2 text-cgpRed"></i> cgpuni@gmail.com</p>
+                    <p class="text-sm text-gray-400 mb-4"><i class="fa-solid fa-phone mr-2 text-cgpBlue"></i> 08060889045</p>
+                    <a href="https://wa.me/2348060889045" target="_blank" class="inline-block bg-cgpRed text-white text-xs font-bold px-4 py-2 rounded-lg">
+                        <i class="fa-brands fa-whatsapp mr-1"></i> WhatsApp Desk
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500">
+                <p>&copy; 2026 Covenant Gospel Pioneer University (CGPU). All rights reserved.</p>
+                <p class="mt-2 sm:mt-0">Designed for Excellence & Innovation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        // 1. PRELOADER LOGIC (Runs for 3 seconds onload)
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 700);
+            }, 3000);
+        });
+
+        // 2. LIGHT / DARK MODE TOGGLE
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            const iconMobile = document.getElementById('theme-icon-mobile');
+
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                if (icon) icon.className = "fa-solid fa-moon text-lg";
+                if (iconMobile) iconMobile.className = "fa-solid fa-moon";
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                if (icon) icon.className = "fa-solid fa-sun text-lg text-yellow-400";
+                if (iconMobile) iconMobile.className = "fa-solid fa-sun text-yellow-400";
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // 3. PAGE ROUTING & SKELETON LOADER
+        function switchPage(pageId) {
+            const skeleton = document.getElementById('skeleton-loader');
+            const mainContent = document.getElementById('main-content');
+
+            // Show Skeleton network loader briefly for smooth transition feel
+            skeleton.classList.remove('hidden');
+            mainContent.classList.add('opacity-40');
+
+            setTimeout(() => {
+                skeleton.classList.add('hidden');
+                mainContent.classList.remove('opacity-40');
+
+                const sections = document.querySelectorAll('.page-section');
+                sections.forEach(sec => sec.classList.add('hidden'));
+
+                const targetPage = document.getElementById('page-' + pageId);
+                if (targetPage) {
+                    targetPage.classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+
+                // Update Active Nav Link Styling
+                const navButtons = document.querySelectorAll('.nav-btn');
+                navButtons.forEach(btn => {
+                    btn.classList.remove('text-cgpBlue', 'bg-blue-50', 'dark:bg-blue-900/30');
+                    btn.classList.add('text-gray-700', 'dark:text-gray-300');
+                });
+
+                const activeBtn = document.getElementById('nav-' + pageId);
+                if (activeBtn) {
+                    activeBtn.classList.remove('text-gray-700', 'dark:text-gray-300');
+                    activeBtn.classList.add('text-cgpBlue', 'bg-blue-50', 'dark:bg-blue-900/30');
+                }
+            }, 250);
+        }
+
+        // 4. ANNOUNCEMENT BAR ROUTING TO NEWS SECTION
+        function navigateToNews() {
+            switchPage('about');
+            setTimeout(() => {
+                const newsElem = document.getElementById('news-section');
+                if (newsElem) newsElem.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+
+        // 5. DOWNLOAD PDF PROSPECTUS HANDLER
+        function downloadProspectusPDF() {
+            const pdfContent = `%PDF-1.4
+1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj
+2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj
+3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R >> endobj
+4 0 obj << /Length 200 >> stream
+BT
+/F1 18 Tf
+50 700 TD
+(COVENANT GOSPEL PIONEER UNIVERSITY) Tj
+/F1 12 Tf
+0 -30 TD
+(OFFICIAL ADMISSION PROSPECTUS & FACULTY HANDBOOK) Tj
+0 -20 TD
+(Direct WhatsApp Application: +234 806 088 9045 | Email: cgpuni@gmail.com) Tj
+ET
+endstream endobj
+xref
+0 5
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000216 00000 n 
+trailer << /Size 5 /Root 1 0 R >>
+startxref
+460
+%%EOF`;
+
+            const blob = new Blob([pdfContent], { type: 'application/pdf' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'CGPU_Admission_Prospectus_Handbook.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // 6. ON-SCROLL JS NUMBER COUNTER
+        let counterAnimated = false;
+        function animateCounters() {
+            const counterSection = document.getElementById('counter-section');
+            if (!counterSection) return;
+
+            const rect = counterSection.getBoundingClientRect();
+            if (rect.top <= window.innerHeight && !counterAnimated) {
+                counterAnimated = true;
+                const counters = document.querySelectorAll('.counter');
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    let count = 0;
+                    const speed = target / 50;
+                    const updateCount = () => {
+                        count += speed;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count);
+                            setTimeout(updateCount, 30);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                });
+            }
+        }
+        window.addEventListener('scroll', animateCounters);
+
+        // 7. TOGGLE MOBILE HAMBURGER MENU
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            }
+        }
+
+        // 8. HERO BANNER BACKGROUND SLIDER (10 seconds interval)
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        function rotateSlides() {
+            if (slides.length === 0) return;
+            slides[currentSlide].style.opacity = '0';
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].style.opacity = '1';
+        }
+        setInterval(rotateSlides, 10000);
+
+        // 9. WHATSAPP FORM SUBMISSION
+        function submitToWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('applicantName').value;
+            const phone = document.getElementById('applicantPhone').value;
+            const faculty = document.getElementById('applicantFaculty').value;
+            const course = document.getElementById('applicantCourse').value;
+            const notes = document.getElementById('applicantNotes').value;
+
+            const message = `*New Admission Inquiry - CGPU*%0A%0A*Full Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Faculty:* ${encodeURIComponent(faculty)}%0A*Course:* ${encodeURIComponent(course)}%0A*Notes:* ${encodeURIComponent(notes)}`;
+            
+            const whatsappUrl = `https://wa.me/2348060889045?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
